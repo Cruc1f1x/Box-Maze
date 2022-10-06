@@ -13,7 +13,7 @@ public class Restarter_on_Hit : MonoBehaviour
     }
 
     void restart(){
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         Debug.Log("hello");
     }
 }
