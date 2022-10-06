@@ -17,6 +17,6 @@ public class Escape : MonoBehaviour
     }
 
     void changescene(){
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
