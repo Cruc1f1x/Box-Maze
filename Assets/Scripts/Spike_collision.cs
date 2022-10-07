@@ -6,16 +6,17 @@ using UnityEngine.SceneManagement;
 public class Spike_collision : MonoBehaviour
 {
     [SerializeField] ParticleSystem p_1;
-    // [SerializeField] float deathDelay =2f;
+    
     Rigidbody2D myRigidbody;
     
     SpriteRenderer[] sprites;
+
+   [SerializeField] AudioClip deathSound;
   
 
 
     private void Start() {
-        // GetComponent<ParticleSystem>();
-        // playerSprite= GetComponentInChildren<SpriteRenderer> ();
+        
         myRigidbody = GetComponent<Rigidbody2D>();
         sprites = GetComponentsInChildren<SpriteRenderer>();
     }
@@ -23,9 +24,9 @@ public class Spike_collision : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "Spike"){
-            // StartCoroutine(Death());
+            
             Death();
-            // SceneManager.LoadScene(0);
+            
         }
     }
 
@@ -40,11 +41,22 @@ public class Spike_collision : MonoBehaviour
                     }
                 
                 p_1.Play();
-
-                // yield return new WaitForSeconds(deathDelay);
-
-                // Destroy(gameObject);
+                GetComponent<AudioSource>().PlayOneShot(deathSound);
+                
 
 
+            }
+
+            
+            void OnTriggerExit2D(Collider2D other)
+            {
+                if(other.tag=="Escape line"){
+                     myRigidbody.simulated =false;
+                
+                 foreach(SpriteRenderer sprite in sprites) 
+                    {
+                            sprite.enabled = false;
+                    }
+                }
             }
 }
